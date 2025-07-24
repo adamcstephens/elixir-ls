@@ -18,7 +18,7 @@ fi
 # include the local .ez files, and then do what we were asked to do.
 
 SCRIPT=$(readlink -f "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")/../libexec
+SCRIPTPATH=$(dirname "$SCRIPT")/../scripts
 
 export MIX_ENV=prod
 # Mix.install prints to stdout and reads from stdin
@@ -30,5 +30,9 @@ default_erl_opts="-kernel standard_io_encoding latin1 +sbwt none +sbwtdcpu none 
 # ensure elixir stdlib can be found
 ELX_STDLIB_PATH=${ELX_STDLIB_PATH:-@elixir@/lib/elixir}
 export ELX_STDLIB_PATH
+
+# ensure our elixir is in the path
+PATH="@elixir@/bin:$PATH"
+export PATH
 
 source "$SCRIPTPATH/exec.bash"
